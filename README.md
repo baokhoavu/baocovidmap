@@ -2,7 +2,7 @@
 
 [![Powered by Vercel](./powered-by-vercel.svg)](https://vercel.com?utm_source=pulakchakraborty)
 
-Covid Map is a map-based responsive web-application built using Create-React-App to monitor and visualize the spread of the novel Covid19 virus across the world.
+Bao Covid Map is a map-based responsive web-application built using Create-React-App to monitor and visualize the spread of the novel Covid19 virus across the world. Data grabbed is represented on graphs using key targets.
 
 ## Demo
 
