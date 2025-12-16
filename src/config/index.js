@@ -1,12 +1,12 @@
-export default {
-  jhucsse: 'https://corona.lmao.ninja/v2/jhucsse',
-  indiaLatest: 'https://api.rootnet.in/covid19-in/stats/latest',
-  indiaHistory: 'https://api.rootnet.in/covid19-in/stats/history',
-  vietnamLatest:
-    'https://api.apify.com/v2/key-value-stores/EaCBL1JNntjR3EakU/records/LATEST?disableRedirect=true',
-  vietnamHistory:
-    'https://api.apify.com/v2/datasets/RnzK2Aea1RlgBcauw/items?format=json&clean=1',
-  countriesLatest: 'https://corona.lmao.ninja/v2/countries',
-  allSummary: 'https://corona.lmao.ninja/v2/all',
-  allHistory: 'https://corona.lmao.ninja/v2/historical/all',
+const config = {
+  jhucsse: { url: '/mockData.json', key: 'jhucsse' },
+  indiaLatest: { url: '/mockData.json', key: 'indiaLatest' },
+  indiaHistory: { url: '/mockData.json', key: 'indiaHistory' },
+  vietnamLatest: { url: '/mockData.json', key: 'vietnamLatest' },
+  vietnamHistory: { url: '/mockData.json', key: 'vietnamHistory' },
+  countriesLatest: { url: '/mockData.json', key: 'countriesLatest' },
+  allSummary: { url: '/mockData.json', key: 'allSummary' },
+  allHistory: { url: '/mockData.json', key: 'allHistory' },
 };
+
+export default config;

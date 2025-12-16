@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+.package-lock.json
+.yarn-integrity
 
 # testing
 /coverage
@@ -27,3 +29,6 @@ yarn-error.log*
 *.png
 .PNG
 *.PNG
+
+# Mock data
+public/mockData.json

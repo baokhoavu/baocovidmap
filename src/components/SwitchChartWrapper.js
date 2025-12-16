@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import FormGroup from '@material-ui/core/FormGroup';
-import Switch from '@material-ui/core/Switch';
-import Grid from '@material-ui/core/Grid';
+import FormGroup from '@mui/material/FormGroup';
+import Switch from '@mui/material/Switch';
+import Grid from '@mui/material/Grid';
 
 const Styles = styled.div`
   font-size: 0.9rem;

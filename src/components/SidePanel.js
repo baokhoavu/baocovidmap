@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo, lazy, Suspense } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 import CasesHighlights from './CasesHighlights';
@@ -31,6 +30,7 @@ const Styles = styled.div`
   background: rgba(34, 49, 63, 1);
   color: #7787a5;
   justify-content: center;
+  z-index: 10;
 
   @media (min-width: 768px) {
     width: 420px;
@@ -85,12 +85,11 @@ const renderLoader = () => (
 
 const SidePanel = ({ summary, worldMap, tableData }) => {
   const [allHistorical, setAllHistorical] = useState([]);
-  const [setErrorMessage] = useState('');
   //   const [newInfectionsChart, setNewInfectionsChart] = useState(false);
   /* Stores any one of the four available charts for rendering purpose */
   const [chartName, setChartName] = useState('Total Cases');
 
-  const { allHistory } = config;
+  const allHistory = config.allHistory;
 
   const tableColumnsWorld = useMemo(() => [{ ...TableSettingsWorld }], []);
 
@@ -98,45 +97,39 @@ const SidePanel = ({ summary, worldMap, tableData }) => {
     const fetchLatestData = async () => {
       try {
         if (worldMap && allHistorical.length === 0) {
-          const {
-            data: responseAllHistory,
-            status: statusAllHistory,
-          } = await axios.get(allHistory);
-          if (statusAllHistory === 200) {
-            setAllHistorical([
-              ...Object.keys(responseAllHistory.cases)
-                .slice(1)
-                .map((item, index) => ({
-                  day: item,
-                  confirmed: Object.values(responseAllHistory.cases)[index + 1],
-                  dead: Object.values(responseAllHistory.deaths)[index + 1],
-                  recovered: Object.values(responseAllHistory.recovered)[
-                    index + 1
-                  ],
-                  active:
-                    Object.values(responseAllHistory.cases)[index + 1] -
-                    Object.values(responseAllHistory.recovered)[index + 1],
-                  newCases:
-                    Object.values(responseAllHistory.cases)[index + 1] -
-                    Object.values(responseAllHistory.cases)[index],
-                  newRecoveries:
-                    Object.values(responseAllHistory.recovered)[index + 1] -
-                    Object.values(responseAllHistory.recovered)[index],
-                  newDeaths:
-                    Object.values(responseAllHistory.deaths)[index + 1] -
-                    Object.values(responseAllHistory.deaths)[index],
-                })),
-            ]);
-          }
+          const mockData = await fetch(allHistory.url).then(r => r.json());
+          const responseAllHistory = mockData[allHistory.key];
+          setAllHistorical([
+            ...Object.keys(responseAllHistory.cases)
+              .slice(1)
+              .map((item, index) => ({
+                day: item,
+                confirmed: Object.values(responseAllHistory.cases)[index + 1],
+                dead: Object.values(responseAllHistory.deaths)[index + 1],
+                recovered: Object.values(responseAllHistory.recovered)[
+                  index + 1
+                ],
+                active:
+                  Object.values(responseAllHistory.cases)[index + 1] -
+                  Object.values(responseAllHistory.recovered)[index + 1],
+                newCases:
+                  Object.values(responseAllHistory.cases)[index + 1] -
+                  Object.values(responseAllHistory.cases)[index],
+                newRecoveries:
+                  Object.values(responseAllHistory.recovered)[index + 1] -
+                  Object.values(responseAllHistory.recovered)[index],
+                newDeaths:
+                  Object.values(responseAllHistory.deaths)[index + 1] -
+                  Object.values(responseAllHistory.deaths)[index],
+              })),
+          ]);
         }
       } catch (e) {
-        if (e.response) {
-          setErrorMessage(e.response.data.message);
-        }
+        console.error('Error fetching data:', e);
       }
     };
     fetchLatestData();
-  }, [worldMap, allHistorical.length, allHistory, setErrorMessage]);
+  }, [worldMap, allHistorical.length, allHistory]);
 
   return (
     <Styles>
