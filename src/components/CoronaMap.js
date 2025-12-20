@@ -26,16 +26,16 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOXGL_ACCESS_TOKEN;
 
 const MapContainer = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: grid;
   position: relative;
 
   @media (min-width: 768px) {
-    height: 100vh;
+    height: 100%;
   }
 
   @media (min-width: 1024px) {
-    height: 100vh;
+    height: 100%;
   }
 `;
 
@@ -61,7 +61,7 @@ const MapPlaceholder = styled.div`
   align-items: center;
   opacity: 0.85;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   color: white;
@@ -71,11 +71,11 @@ const MapPlaceholder = styled.div`
   position: relative;
 
   @media (min-width: 768px) {
-    height: 100vh;
+    height: 100%;
   }
 
   @media (min-width: 1024px) {
-    height: 100vh;
+    height: 100%;
   }
 `;
 
