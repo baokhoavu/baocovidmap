@@ -13,14 +13,14 @@ import styled from 'styled-components';
 const Styles = styled.div`
   padding: 1rem;
   width: 100%;
-  height: 256px;
+  height: 280px;
 
   @media (min-width: 768px) {
-    height: 220px;
+    height: 240px;
   }
 
   @media (min-width: 1024px) {
-    height: 220px;
+    height: 240px;
   }
 
   .recharts-cartesian-axis-ticks {
@@ -40,7 +40,7 @@ const DailyChart = ({ chartData }) => {
           data={chartData}
           margin={{
             top: 10,
-            right: 20,
+            right: 30,
             left: 10,
             bottom: 0,
           }}>
@@ -48,11 +48,10 @@ const DailyChart = ({ chartData }) => {
           <YAxis
             type="number"
             tickSize={6}
-            mirror={true}
             domain={[0, 'dataMax']}
           />
           <Tooltip />
-          <Legend />
+          <Legend wrapperStyle={{ paddingTop: '10px' }} />
           <Line
             name="New Cases"
             type="monotone"

@@ -170,8 +170,8 @@ const LeafletCovidMap = ({ data, mockStats }) => {
         maxBoundsViscosity={1.0}
       >
         <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
           noWrap={true}
           bounds={[[-90, -180], [90, 180]]}
         />
@@ -181,36 +181,77 @@ const LeafletCovidMap = ({ data, mockStats }) => {
           const mortalityRate = confirmed > 0 ? ((dead / confirmed) * 100).toFixed(2) : 0;
 
           return (
-            <CircleMarker
-              key={index}
-              center={[coordinates[1], coordinates[0]]}
-              radius={getRadius(confirmed)}
-              fillColor={getColor(confirmed)}
-              color="#fff"
-              weight={2}
-              opacity={0.8}
-              fillOpacity={0.6}
-            >
-              <Popup>
-                <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '200px' }}>
-                  <h4 style={{ margin: '0 0 8px 0', color: '#333' }}>{countryName}</h4>
-                  <div style={{ fontSize: '14px', lineHeight: '1.4' }}>
-                    <p style={{ margin: '4px 0', color: '#d32f2f' }}>
-                      <strong>Confirmed:</strong> {confirmed?.toLocaleString() || 'N/A'}
-                    </p>
-                    <p style={{ margin: '4px 0', color: '#2e7d32' }}>
-                      <strong>Recovered:</strong> {recovered?.toLocaleString() || 'N/A'}
-                    </p>
-                    <p style={{ margin: '4px 0', color: '#1976d2' }}>
-                      <strong>Deaths:</strong> {dead?.toLocaleString() || 'N/A'}
-                    </p>
-                    <p style={{ margin: '4px 0', color: '#666' }}>
-                      <strong>Mortality Rate:</strong> {mortalityRate}%
-                    </p>
+            <React.Fragment key={index}>
+              {/* Confirmed cases circle - Blue */}
+              {confirmed > 0 && (
+                <CircleMarker
+                  center={[coordinates[1], coordinates[0]]}
+                  radius={getRadius(confirmed)}
+                  fillColor="#32527b"
+                  color="#32527b"
+                  weight={1}
+                  opacity={0.3}
+                  fillOpacity={0.4}
+                />
+              )}
+
+              {/* Recovered cases circle - Green */}
+              {recovered > 0 && (
+                <CircleMarker
+                  center={[coordinates[1], coordinates[0]]}
+                  radius={getRadius(recovered)}
+                  fillColor="#2e7d32"
+                  color="#2e7d32"
+                  weight={1}
+                  opacity={0.3}
+                  fillOpacity={0.4}
+                />
+              )}
+
+              {/* Death cases circle - Red */}
+              {dead > 0 && (
+                <CircleMarker
+                  center={[coordinates[1], coordinates[0]]}
+                  radius={getRadius(dead)}
+                  fillColor="#d32f2f"
+                  color="#d32f2f"
+                  weight={1}
+                  opacity={0.3}
+                  fillOpacity={0.4}
+                />
+              )}
+
+              {/* Popup marker (invisible, just for popup) */}
+              <CircleMarker
+                center={[coordinates[1], coordinates[0]]}
+                radius={1}
+                fillColor="transparent"
+                color="transparent"
+                weight={0}
+                opacity={0}
+                fillOpacity={0}
+              >
+                <Popup>
+                  <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '200px' }}>
+                    <h4 style={{ margin: '0 0 8px 0', color: '#333' }}>{countryName}</h4>
+                    <div style={{ fontSize: '14px', lineHeight: '1.4' }}>
+                      <p style={{ margin: '4px 0', color: '#32527b' }}>
+                        <strong>Confirmed:</strong> {confirmed?.toLocaleString() || 'N/A'}
+                      </p>
+                      <p style={{ margin: '4px 0', color: '#2e7d32' }}>
+                        <strong>Recovered:</strong> {recovered?.toLocaleString() || 'N/A'}
+                      </p>
+                      <p style={{ margin: '4px 0', color: '#d32f2f' }}>
+                        <strong>Deaths:</strong> {dead?.toLocaleString() || 'N/A'}
+                      </p>
+                      <p style={{ margin: '4px 0', color: '#666' }}>
+                        <strong>Mortality Rate:</strong> {mortalityRate}%
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Popup>
-            </CircleMarker>
+                </Popup>
+              </CircleMarker>
+            </React.Fragment>
           );
         })}
       </LeafletMapContainer>
@@ -275,7 +316,7 @@ const CoronaMap = ({ data }) => {
             */
       const map = new mapboxgl.Map({
         container: mapboxRef.current,
-        style: 'mapbox://styles/mapbox/dark-v10', // theme of the map
+        style: 'mapbox://styles/mapbox/dark-v11', // Updated to latest dark theme
         center: [76.33643, 22.5493], // initial geo location
         //maxBounds: bounds    // restrict map panning to an area
         zoom: 4,

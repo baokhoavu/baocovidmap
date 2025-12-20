@@ -40,7 +40,7 @@ const DailyDeathsChart = ({ chartData }) => {
           data={chartData}
           margin={{
             top: 10,
-            right: 20,
+            right: 30,
             left: 10,
             bottom: 0,
           }}>
@@ -48,11 +48,10 @@ const DailyDeathsChart = ({ chartData }) => {
           <YAxis
             type="number"
             tickSize={6}
-            mirror={true}
             domain={[0, 'dataMax']}
           />
           <Tooltip />
-          <Legend />
+          <Legend wrapperStyle={{ paddingTop: '10px' }} />
           <Bar
             name="New Deaths"
             dataKey="newDeaths"

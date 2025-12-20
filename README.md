@@ -57,3 +57,42 @@ It correctly bundles React in production mode and optimizes the build for the be
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## Database Setup (MongoDB Atlas)
+
+This application uses MongoDB Atlas for data storage instead of static JSON files.
+
+### Prerequisites
+- MongoDB Atlas account and cluster
+- Vercel account connected to MongoDB Atlas
+
+### Environment Configuration
+1. Copy `.env.local.example` to `.env.local`
+2. Add your MongoDB Atlas connection string:
+   ```
+   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+   ```
+
+### Database Seeding
+After setting up your MongoDB connection:
+
+```bash
+# Seed the database with mock data
+npm run seed-db
+```
+
+This will migrate all data from `mockData.json` to your MongoDB Atlas database.
+
+### Vercel Deployment
+1. Add `MONGODB_URI` environment variable in Vercel dashboard
+2. Deploy your application
+3. The API routes will automatically connect to MongoDB
+
+### Data Structure
+The database contains the following collections:
+- `countrylatests` - Country-level COVID statistics
+- `allhistories` - Global historical time-series data
+- `jhucsses` - Provincial/state-level data (including 21 US states)
+- `allsummarys` - Global summary statistics
+- `indialatests`, `indiahistories` - India-specific data
+- `vietnamlatests`, `vietnamhistories` - Vietnam-specific data
