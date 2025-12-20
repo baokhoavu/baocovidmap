@@ -1,98 +1,112 @@
-## Bao's Covid Tracking Map
+# Bao's COVID-19 Tracking Map
 
-[![Powered by Vercel](./powered-by-vercel.svg)](https://vercel.com?utm_source=pulakchakraborty)
+COVID-19 tracking map project - a responsive web app I built to help visualize the global spread of the coronavirus during those intense early pandemic days. Using Create React App as the foundation, it pulls real-time data and displays it on interactive maps and charts so people can understand what's happening around the world.
 
-Bao Covid Map is a map-based responsive web-application built using Create-React-App to monitor and visualize the spread of the novel Covid19 virus across the world. Data grabbed is represented on graphs using key targets.
+## Live Demo
 
-## Demo
+Check it out live: [https://baocovidmap.vercel.app/](https://baocovidmap.vercel.app/)
 
-### [https://baocovidmap.vercel.app/](https://baocovidmap.vercel.app/)
+## What It Does
 
-### Features
+- **Interactive Dashboard**: Get the latest numbers on confirmed cases, recoveries, and deaths for every country
+- **Historical Data Visualization**: See how things progressed over time with area charts, line graphs, and bar charts
+- **Global Map View**: Click around the world to see COVID impact by location
+- **Responsive Design**: Works great on desktop, tablet, and mobile
 
-- Interactive dashboard which provides a latest and historical summary of the confirmed, recovered and deceased cases in the world on a country-level.
-- The dashboard also includes area, line and bar charts to visualize the historical data on cumulative and daily basis.
-- An interactive map shows the impact of Coronavirus on a geographical level.
+## Tech Stack
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Frontend
+- **Create React App** - The reliable React boilerplate that got me started
+- **Mapbox** - For those beautiful, interactive maps
+- **Recharts** - Clean, customizable charts that tell the data story
+- **React Table** - Making data tables sortable and filterable
+- **Styled Components** - Keeping the CSS organized and component-scoped
+- **Axios** - Handling all the API calls smoothly
 
-## Built With
+### Hosting & Deployment
+- **Vercel** - Super easy deployment with great performance
 
-### Tools and Services
+### Data Source
+- **COVID-19 API** - Pulling from corona.lmao-xd.wtf for global statistics
 
-- [Create React App](https://github.com/facebook/create-react-app)
-- [Mapbox](https://www.mapbox.com/?utm_source=pchakraborty)
-- [Axios](https://github.com/axios/axios)
-- [Recharts](https://github.com/recharts/recharts)
-- [React Table](https://github.com/tannerlinsley/react-table)
-- [Styled Components](https://styled-components.com)
-- [Vercel](https://vercel.com?utm_source=pulakchakraborty)
+## Getting Started
 
-### APIs
+### Prerequisites
+You'll need Node.js and npm installed on your machine.
 
-- [Covid19 REST API for Global data](https://docs.corona.lmao-xd.wtf/version-2)
+### Installation
 
-## Available Scripts
+1. Clone the repo
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm start
+   ```
+   This will open http://localhost:3000 in your browser.
 
-In the project directory, you can run:
+### Building for Production
 
-### `yarn start`
+```bash
+npm run build
+```
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This creates an optimized build in the `build` folder, ready for deployment.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### Running Tests
 
-### `yarn test`
+```bash
+npm test
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Launches the test runner in interactive watch mode.
 
 ## Database Setup (MongoDB Atlas)
 
-This application uses MongoDB Atlas for data storage instead of static JSON files.
+### Setup Steps
 
-### Prerequisites
-- MongoDB Atlas account and cluster
-- Vercel account connected to MongoDB Atlas
-
-### Environment Configuration
-1. Copy `.env.local.example` to `.env.local`
-2. Add your MongoDB Atlas connection string:
+1. **Create MongoDB Atlas Account**: Sign up at mongodb.com and create a free cluster
+2. **Get Connection String**: Copy your connection URI from the Atlas dashboard
+3. **Environment Variables**: Create a `.env.local` file (copy from `.env.local.example`):
    ```
-   MONGODB_URI=mongodb+srv://<username>:<password>@<cluster>.mongodb.net/<database>?retryWrites=true&w=majority
+   MONGODB_URI=mongodb+srv://yourusername:yourpassword@cluster0.xxxxx.mongodb.net/covidmap?retryWrites=true&w=majority
    ```
 
-### Database Seeding
-After setting up your MongoDB connection:
+### Seeding the Database
+
+Once your database is connected:
 
 ```bash
-# Seed the database with mock data
 npm run seed-db
 ```
 
-This will migrate all data from `mockData.json` to your MongoDB Atlas database.
+This script migrates all the mock data from `mockData.json` into your MongoDB collections.
+
+### Database Schema
+
+The app stores data in these collections:
+- **countrylatests**: Current stats by country
+- **allhistories**: Global timeline data
+- **jhucsses**: Provincial/state data (including US states)
+- **allsummarys**: World totals
+- **indialatests/indiahistories**: India-specific data
+- **vietnamlatests/vietnamhistories**: Vietnam-specific data
 
 ### Vercel Deployment
-1. Add `MONGODB_URI` environment variable in Vercel dashboard
-2. Deploy your application
-3. The API routes will automatically connect to MongoDB
 
-### Data Structure
-The database contains the following collections:
-- `countrylatests` - Country-level COVID statistics
-- `allhistories` - Global historical time-series data
-- `jhucsses` - Provincial/state-level data (including 21 US states)
-- `allsummarys` - Global summary statistics
-- `indialatests`, `indiahistories` - India-specific data
-- `vietnamlatests`, `vietnamhistories` - Vietnam-specific data
+For production deployment:
+
+1. Connect your Vercel account to MongoDB Atlas
+2. Add the `MONGODB_URI` environment variable in Vercel dashboard
+3. Deploy - the API routes will automatically connect to your database
+
+## How It Works
+
+The app fetches data from the COVID-19 API and stores it in MongoDB. The frontend then queries this data to power the maps, charts, and tables. It's all about making global health data accessible and understandable.
+
+## License
+
+This project is open source - feel free to use it as inspiration for your own projects.
+Built with during the COVID-19 pandemic to help people stay informed.
