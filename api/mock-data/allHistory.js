@@ -20,7 +20,8 @@ export default async function handler(req, res) {
       if (!data) {
         return res.status(404).json({ error: 'No historical data found' });
       }
-      res.status(200).json(data);
+      // Wrap the data in the expected format
+      res.status(200).json({ allHistory: data });
     } else {
       res.status(405).json({ error: 'Method not allowed' });
     }

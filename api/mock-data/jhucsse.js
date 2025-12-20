@@ -17,7 +17,8 @@ export default async function handler(req, res) {
 
     if (req.method === 'GET') {
       const data = await JHUCSSE.find({});
-      res.status(200).json(data);
+      // Return data wrapped in the expected key format
+      res.status(200).json({ jhucsse: data });
     } else {
       res.status(405).json({ error: 'Method not allowed' });
     }
