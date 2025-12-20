@@ -9,7 +9,7 @@ const WidgetWrapper = lazy(() => import('./WidgetWrapper'));
 
 const AppStyle = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,11 @@ const AppPlaceholder = styled.div`
   width: 100%;
   height: 100%;
 `;
+
+const MainContent = styled.div`
+  flex: 1;
+  position: relative;
+`;
 const renderLoader = () => (
   <AppPlaceholder>
     <Spinner />
@@ -37,7 +42,9 @@ const App = () => {
       <GlobalStyle />
       <AppStyle>
         <Suspense fallback={renderLoader()}>
-          <WidgetWrapper />
+          <MainContent>
+            <WidgetWrapper />
+          </MainContent>
           <Footer />
         </Suspense>
       </AppStyle>
