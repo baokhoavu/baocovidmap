@@ -79,9 +79,13 @@ const WidgetWrapper = () => {
 
   return (
     <Fragment>
-      <CoronaMap data={data} error={errorMessage} />
+      <div style={{ width: '100vw', height: '100vh', minHeight: '100vh', position: 'relative', display: 'flex', flexDirection: 'row' }}>
+        <div style={{ flex: 1, height: '100vh', minHeight: '100vh' }}>
+          <CoronaMap data={data} error={errorMessage} />
+        </div>
+        <SidePanel summary={summary} worldMap={worldMap} tableData={tableData} />
+      </div>
       {/* <MapFilter worldMap={worldMap} switchMap={switchMap} /> */}
-      <SidePanel summary={summary} worldMap={worldMap} tableData={tableData} />
     </Fragment>
   );
 };
