@@ -51,10 +51,12 @@ const MapBox = styled.div`
 
   @media (min-width: 768px) {
     height: 100%;
+    min-height: 100vh;
   }
 
   @media (min-width: 1024px) {
     height: 100%;
+    min-height: 100vh;
   }
 `;
 
@@ -64,6 +66,7 @@ const MapPlaceholder = styled.div`
   align-items: center;
   opacity: 0.85;
   width: 100%;
+  min-height: 100vh;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -75,10 +78,12 @@ const MapPlaceholder = styled.div`
 
   @media (min-width: 768px) {
     height: 100%;
+    min-height: 100vh;
   }
 
   @media (min-width: 1024px) {
     height: 100%;
+    min-height: 100vh;
   }
 `;
 
